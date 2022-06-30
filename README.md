@@ -1,0 +1,2 @@
+# example
+ wordpress theme example
