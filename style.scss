@@ -1,0 +1,87 @@
+/*
+	Theme Name: Example
+	Theme URI: https://www.wtttb.com/
+	Author: Chief Wang
+	Author URI: https://www.wtttb.com/
+	Description: 一个超级简单的博客
+	Version: 1.0.0
+	Requires at least: 5.5
+	Tested up to: 5.5
+	Requires PHP: 7.2
+  License: GNU General Public License v3 or later
+  License URI: http://www.gnu.org/licenses/gpl-3.0.html
+	Text Domain: wtb
+	This theme, like WordPress, is licensed under the GPL.
+	Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+// 转换字体和颜色
+@function toRem($px) {
+  @return ($px / 16px) + rem;
+}
+
+@function toRemF($px) {
+  @return (-($px / 16px)+rem);
+}
+
+$base: #c7e267;
+$black: #131314;
+$white: #ffffff;
+
+/*--------------------------初始化--------------------------*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  background: transparent;
+}
+
+img {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+img,
+figure,
+video {
+  max-width: 100%;
+  height: auto;
+  line-height: 1;
+}
+
+input {
+  min-width: 0;
+}
+
+a,
+button,
+input,
+textarea {
+  transition: .3s ease-in-out;
+}
+
+/*--------------------------基本设置--------------------------*/
+html {
+  font-size: 100%;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+article {
+  padding: toRem(16px);
+  margin-bottom: toRem(32px);
+}
