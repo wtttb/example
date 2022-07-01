@@ -103,4 +103,4 @@ require_once get_theme_file_path('wp-clean-up/wp-clean-up.php');
 
 require_once get_theme_file_path('classes/class-breadcrumbs.php');
 require_once get_theme_file_path('classes/class-duplicatepost.php');
-//require_once get_theme_file_path('classes/class-commentshtml5.php');
+require_once get_theme_file_path('classes/class-commentshtml5.php');

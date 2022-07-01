@@ -18,7 +18,7 @@ function wtb_menu_class_filter($var)
   标题添加数量
 =============================================*/
 add_filter('get_the_archive_title', function ($title) {
-  $posts_nums = "（" . absint($GLOBALS['wp_query']->found_posts) . "）";
+  $posts_nums = "(" . absint($GLOBALS['wp_query']->found_posts) . ")";
   if (is_category()) {
     $title  = single_cat_title('', false) . $posts_nums;
   } elseif (is_tag()) {
@@ -38,6 +38,12 @@ add_filter('get_the_archive_title', function ($title) {
     if ($object) {
       $title  = single_term_title('', false) . $posts_nums;
     }
+  } elseif (is_search()) {
+    $title  = sprintf(
+      __('搜索 %s 相关结果有: %s篇', 'wtb'),
+      "<span>{ " . get_search_query() . " }</span>",
+      "<span>{$posts_nums}</span>"
+    );
   }
   return $title;
 });
@@ -122,6 +128,22 @@ add_filter('excerpt_length', function ($length) {
 });
 
 /*=============================================
+  文章最后更新时间
+=============================================*/
+add_filter('the_content', function ($content) {
+  $output   = '';
+  $time     = get_the_time('U');
+  $modified = get_the_modified_time('U');
+  if ($modified >= $time + 86400) {
+    $update = get_the_modified_time('F jS, Y');
+    $uptime = get_the_modified_time('h:i a');
+    $output .= '<p class="last-updated">Last updated on ' . $update . ' at ' . $uptime . '</p>';
+  }
+  $output .= $content;
+  return $output;
+});
+
+/*=============================================
   连接 Goto 跳转
 =============================================*/
 add_filter('the_content', function ($content) {
@@ -151,7 +173,6 @@ add_action('load-themes.php', function () {
     }
   }
 });
-
 
 /*=============================================
   头条自动推送JS
@@ -327,8 +348,27 @@ if (!function_exists('wtb_get_term_slugs')) {
   function wtb_get_term_slugs($taxonomy = '')
   {
     $output = '';
-    // https://developer.wordpress.org/reference/classes/wp_term_query/__construct/
+    // https://developer.wordpress.org/reference/functions/get_terms/
     foreach (get_terms(['taxonomy' => $taxonomy == '' ? 'category' : $taxonomy]) as $term) {
+      $output .= esc_html($term->slug) . ',';
+    }
+    return array_filter(array_unique(explode(',', $output)));
+  }
+}
+
+/*=============================================
+  当前文章所属分类 slug 数组
+=============================================*/
+if (!function_exists('wtb_get_term_slugs')) {
+  /**
+   * @param string|array $taxonomy  分类法名称
+   * @return array
+   */
+  function wtb_get_term_slugs($taxonomy = '')
+  {
+    $output = '';
+    // https://developer.wordpress.org/reference/functions/get_the_terms/
+    foreach (get_the_terms(get_the_ID(), $taxonomy == '' ? 'category' : $taxonomy) as $term) {
       $output .= esc_html($term->slug) . ',';
     }
     return array_filter(array_unique(explode(',', $output)));
