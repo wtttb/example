@@ -1,4 +1,4 @@
-<div class="logged logged__backg" style="background-image: url(https://bing.com/th?id=OHR.ClingmansDome_ZH-CN0900594339_1920x1080.jpg);">
+<div class="logged logged__backg">
   <div class="logged__logreg">
     <?php
     the_title('<h1>', '</h1>');

@@ -1,4 +1,4 @@
-<div class="logged logged__backg" style="background-image: url(https://bing.com/th?id=OHR.ClingmansDome_ZH-CN0900594339_1920x1080.jpg);">
+<div class="logged logged__backg">
   <div class="logged__logo">
     <img src="<?= esc_url(wp_get_attachment_url(get_theme_mod('custom_logo'))); ?>" loading="lazy">
   </div>
