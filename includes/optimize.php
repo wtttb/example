@@ -60,6 +60,7 @@ add_filter('allowed_block_types_all', function ($allowed_block_types, $block_edi
   return $allowed_block_types;
 }, 10, 2);
 
+$sab     = get_theme_mod('wtb_sab_switch', true);
 $aud     = get_theme_mod('wtb_aud_switch', true);
 $aup     = get_theme_mod('wtb_aup_switch', true);
 $aut     = get_theme_mod('wtb_aut_switch', true);
@@ -68,6 +69,7 @@ $guwbe   = get_theme_mod('wtb_guwbe_switch', true);
 $ubefp   = get_theme_mod('wtb_ubefp_switch', false);
 $restapi = get_theme_mod('wtb_restapi_switch', true);
 
+if ($sab && !current_user_can('administrator')) add_filter('show_admin_bar', '__return_false'); // 非管理员禁用工具栏
 if ($aud) add_filter('automatic_updater_disabled', '__return_true'); // 禁用 WP 自动更新
 if ($aup) add_filter('auto_update_plugin', '__return_false'); // 禁止插件自动更新
 if ($aut) add_filter('auto_update_theme', '__return_false'); // 禁止主题自动更新

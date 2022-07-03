@@ -29,15 +29,6 @@ $black: #131314;
 $white: #ffffff;
 
 /*--------------------------初始化--------------------------*/
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  outline: none;
-  box-sizing: border-box;
-  text-decoration: none;
-  list-style: none;
-  border: none;
-  background: transparent;
+html {
+  min-height: 100vh;
 }

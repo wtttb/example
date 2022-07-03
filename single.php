@@ -4,6 +4,10 @@ get_header();
 if (have_posts()) :
   while (have_posts()) : the_post();
 
+    // 标题
+    the_title('<h1>', '</h1>');
+    get_template_part('template-parts/post', 'manage');
+
     // 内容
     the_content();
     get_template_part('template-parts/pagination');

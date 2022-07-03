@@ -47,6 +47,7 @@ add_action('wp_enqueue_scripts',  function () {
 
   wp_enqueue_style('modern-normalize', get_theme_file_uri('assets/css/modern-normalize.css'), [], false, 'all');
   wp_enqueue_style('style', get_stylesheet_uri(), [], filemtime(get_theme_file_path('style.css')), 'all');
+  wp_enqueue_style('logged', get_theme_file_uri('assets/css/logged.css'), [], filemtime(get_theme_file_path('assets/css/logged.css')), 'all');
 
   wp_enqueue_script('jquery');
   wp_enqueue_script('resizesensor-min', get_theme_file_uri('assets/js/resizesensor.min.js'), [], false, true);
@@ -84,13 +85,12 @@ add_action('intermediate_image_sizes_advanced', function ($sizes) {
 add_action('wp_body_open', function () {
   if (preg_match('~MSIE|Internet Explorer~i', $_SERVER['HTTP_USER_AGENT']) || preg_match('~Trident/7.0(; Touch)?; rv:11.0~', $_SERVER['HTTP_USER_AGENT'])) {
     printf(
-      '<div class="browser alert alert-danger">%s',
-      __('浏览器版本可能过低！该网站将在此浏览器中提供有限的显示效果与功能，建议升级为Chrome，Firefox，Safari，Edge等', 'wtb'),
+      '<div class="browser alert alert-danger">%s%s',
+      __('浏览器版本可能过低！该网站将在此浏览器中提供有限的显示效果与功能，建议升级为Chrome，Firefox，Safari，Edge等以获取更好的体验！', 'wtb'),
       sprintf(
         '<a href="https://browsehappy.com/" target="_blank" rel="external nofollow noopener noreferrer">%s</a>',
         __('最新版本浏览器', 'wtb'),
       ),
-      __('以获取更好的体验！', 'wtb'),
     );
   }
 }, 10);
@@ -98,6 +98,10 @@ add_action('wp_body_open', function () {
 require_once get_theme_file_path('includes/optimize.php');
 require_once get_theme_file_path('includes/hooks.php');
 require_once get_theme_file_path('includes/metaog.php');
+
+require_once get_theme_file_path('widgets/widget.php');
+
+require_once get_theme_file_path('user/user.php');
 
 require_once get_theme_file_path('wp-clean-up/wp-clean-up.php');
 

@@ -239,13 +239,17 @@ foreach ($submit_post_types as $spt_value) {
   评论作者链接
 =============================================*/
 add_filter('get_comment_author_link', function ($user_url, $author, $comment_ID) {
-  $comment      = get_comment($comment_ID);
-  $comment_user = $comment->comment_author;
-  $id           = $comment->user_id;
-  $url          = get_author_posts_url($id);
-  $role         = wtb_get_user_role($id);
-  $user_url     = "<a href='{$url}' title='{$comment_user}' rel='author'>{$comment_user}</a>{$role}";
-  return $user_url;
+  $comment   = get_comment($comment_ID);
+  $user_name = $comment->comment_author;
+  $user_id   = $comment->user_id;
+  $user_url  = get_author_posts_url($user_id);
+  $user_role = wtb_get_user_role($user_id);
+  if ($user_id > 0) {
+    $user_url = "<a href='{$user_url}' title='{$user_name}' rel='author' class='comment__info--name'>{$user_name}</a>";
+  } else {
+    $user_url = "<span class='comment__info--name'>{$user_name}</span>";
+  }
+  return $user_url . $user_role;
 }, 10, 3);
 
 /*=============================================

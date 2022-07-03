@@ -16,6 +16,7 @@ $main_args = [
   'posts_per_page'      => get_option('posts_per_page'),
   'paged'               => (get_query_var('paged')) ? get_query_var('paged') : 1,
   'ignore_sticky_posts' => true,
+  /* 'no_found_rows'       => true, */
 ];
 
 $main_query = new WP_Query(array_merge($main_args, $main_add));

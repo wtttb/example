@@ -2,7 +2,7 @@
   <div class="sidebar__inner">
     <?php
     if (is_single()) {
-      dynamic_sidebar('single-sidebar');
+      dynamic_sidebar('sidebar');
     }
     ?>
   </div>

@@ -76,7 +76,7 @@ if (!class_exists('wtb_Duplicate_post')) {
 				wp_redirect(admin_url($url));
 				exit;
 			} else {
-				wp_die(__('帖子创建失败，找不到原始帖子！', 'wtb'));
+				wp_die(__('帖子注册失败，找不到原始帖子！', 'wtb'));
 			}
 		}
 
