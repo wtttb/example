@@ -155,15 +155,6 @@ if (!defined('DISALLOW_FILE_EDIT')) {
 }
 
 /**
- * 推迟所有 JS
- */
-if (!is_admin()) {
-  add_filter('script_loader_tag', function ($tag) {
-    return str_replace(' src', ' defer="defer" src', $tag);
-  }, 10, 1);
-}
-
-/**
  * Oembed
  */
 add_action('init', 'disable_embeds_init', 9999);
@@ -322,6 +313,18 @@ add_filter('heartbeat_settings', function ($settings) {
 /*==================================================================*/
 
 /**
+ * 后台语言选项
+ */
+add_filter('login_display_language_dropdown', '__return_false');
+
+/**
+ * 登陆等抖动
+ */
+add_action('login_footer', function () {
+  remove_action('login_footer', 'wp_shake_js', 12);
+});
+
+/**
  * 帖子元框
  */
 add_action('admin_menu',  function () {
@@ -350,7 +353,7 @@ add_action('wp_dashboard_setup', function () {
 });
 
 /**
- * 所有帮助标签
+ * 删除所有帮助标签
  */
 add_action('admin_head', function () {
   $screen = get_current_screen();
