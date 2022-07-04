@@ -39,6 +39,9 @@
 
   $curl    = add_query_arg($wp->query_string, '', home_url($wp->request));
   $userid  = get_current_user_id();
+  $edit    = is_page('edit') ? get_page_link('edit') : admin_url('edit.php');
+  $heart   = is_page('heart') ? get_page_link('heart') : admin_url('profile.php');
+  $profile = is_page('profile') ? get_page_link('profile') : admin_url('profile.php');
   if (is_user_logged_in()) :
   ?>
 
@@ -47,10 +50,16 @@
     <a href="<?= get_author_posts_url($userid); ?>" rel='author'> <span><?= __('我的主页', 'wtb'); ?></span> </a>
 
     <?php if (!current_user_can('subscriber')) : ?>
-      <a href="<?= esc_url(admin_url('edit')); ?>" target="_blank"> <span><?= __('发布投稿', 'wtb'); ?></span> </a>
+      <a href="{$edit}" target="_blank"> <span><?= __('发布投稿', 'wtb'); ?></span> </a>
     <?php endif; ?>
 
-    <a href="<?= admin_url('profile'); ?>" target="_blank"> <span><?= __('我的账户', 'wtb'); ?></span> </a>
+    <a href="<?= $heart; ?>" target="_blank"> <span><?= __('我的收藏', 'wtb'); ?></span> </a>
+
+    <a href="<?= $profile; ?>" target="_blank"> <span><?= __('我的账户', 'wtb'); ?></span> </a>
+
+    <?php if (current_user_can('administrator')) : ?>
+      <a href="<?= admin_url(); ?>" target="_blank"> <span><?= __('后台管理', 'wtb'); ?></span> </a>
+    <?php endif; ?>
 
   <?php else : ?>
 

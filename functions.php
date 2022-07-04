@@ -97,10 +97,10 @@ add_action('wp_body_open', function () {
 require_once get_theme_file_path('includes/optimize.php');
 require_once get_theme_file_path('includes/hooks.php');
 require_once get_theme_file_path('includes/metaog.php');
-require_once get_theme_file_path('includes/dashboard.php');
 
 require_once get_theme_file_path('widgets/widget.php');
 
+require_once get_theme_file_path('user/user.php');
 
 require_once get_theme_file_path('wp-clean-up/wp-clean-up.php');
 
